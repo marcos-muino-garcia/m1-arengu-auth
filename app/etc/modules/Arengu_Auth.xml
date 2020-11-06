@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Arengu_Auth>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Arengu_Auth>
+    </modules>
+</config>

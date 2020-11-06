@@ -1,0 +1,17 @@
+{
+    "name": "arengu/m1-arengu-auth",
+    "description": "Connect Arengu to your Magento 1 installation",
+    "authors": [
+        {
+            "name": "Arengu",
+            "email": "support@arengu.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "firebase/php-jwt": "^5.2"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

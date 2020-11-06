@@ -1,0 +1,39 @@
+<config>
+    <modules>
+        <Arengu_Auth>
+            <version>1.0.0</version>
+        </Arengu_Auth>
+    </modules>
+
+    <frontend>
+        <routers>
+            <arengu_auth>
+                <use>standard</use>
+                <args>
+                    <module>Arengu_Auth</module>
+                    <frontName>arengu_auth</frontName>
+                </args>
+            </arengu_auth>
+        </routers>
+    </frontend>
+
+    <global>
+        <helpers>
+            <arengu_auth>
+            <class>Arengu_Auth_Helper</class>
+            </arengu_auth>
+        </helpers>
+
+        <models>
+            <arengu_auth>
+            <class>Arengu_Auth_Model</class>
+            </arengu_auth>
+        </models>
+
+        <blocks>
+            <arengu_auth>
+            <class>Arengu_Auth_Block</class>
+            </arengu_auth>
+        </blocks>
+    </global>
+</config>
