@@ -18,21 +18,29 @@
     </frontend>
 
     <global>
+        <resources>
+            <arengu_auth>
+                <setup>
+                    <module>Arengu_Auth</module>
+                </setup>
+            </arengu_auth>
+        </resources>
+
         <helpers>
             <arengu_auth>
-            <class>Arengu_Auth_Helper</class>
+                <class>Arengu_Auth_Helper</class>
             </arengu_auth>
         </helpers>
 
         <models>
             <arengu_auth>
-            <class>Arengu_Auth_Model</class>
+                <class>Arengu_Auth_Model</class>
             </arengu_auth>
         </models>
 
         <blocks>
             <arengu_auth>
-            <class>Arengu_Auth_Block</class>
+                <class>Arengu_Auth_Block</class>
             </arengu_auth>
         </blocks>
     </global>

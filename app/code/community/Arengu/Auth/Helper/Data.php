@@ -18,8 +18,8 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
         $db->delete($table, ['path = ?' => self::CONFIG_JWT_SECRET]);
         $db->delete($table, ['path = ?' => self::CONFIG_API_KEY]);
 
-        $db->insert($table, ['path' => self::CONFIG_JWT_SECRET, 'value' => $helper->getRandomKey()]);
-        $db->insert($table, ['path' => self::CONFIG_API_KEY, 'value' => $helper->getRandomKey()]);
+        $db->insert($table, ['path' => self::CONFIG_JWT_SECRET, 'value' => $this->getRandomKey()]);
+        $db->insert($table, ['path' => self::CONFIG_API_KEY, 'value' => $this->getRandomKey()]);
 
         $db->commit();
 
@@ -175,27 +175,27 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
 
     public function getJwtSecret() {
         return Mage::getModel('core/config_data')
-        ->load(self::CONFIG_JWT_SECRET, 'path')
-        ->getValue();
+            ->load(self::CONFIG_JWT_SECRET, 'path')
+            ->getValue();
     }
 
     public function getApiKey() {
         return Mage::getModel('core/config_data')
-        ->load(self::CONFIG_API_KEY, 'path')
-        ->getValue();
+            ->load(self::CONFIG_API_KEY, 'path')
+            ->getValue();
     }
 
     public function setJwtSecret($secret) {
         Mage::getModel('core/config_data')
-        ->load(self::CONFIG_JWT_SECRET, 'path')
-        ->setValue($secret)
-        ->save();
+            ->load(self::CONFIG_JWT_SECRET, 'path')
+            ->setValue($secret)
+            ->save();
     }
 
     public function setApiKey($key) {
         Mage::getModel('core/config_data')
-        ->load(self::CONFIG_API_KEY, 'path')
-        ->setValue($key)
-        ->save();
+            ->load(self::CONFIG_API_KEY, 'path')
+            ->setValue($key)
+            ->save();
     }
 }
