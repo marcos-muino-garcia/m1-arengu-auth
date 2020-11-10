@@ -1,0 +1,53 @@
+name: Release version
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    name: Build Magento Connect package
+    runs-on: ubuntu-18.04
+
+    env:
+      BUILD_FILENAME: Arengu_Auth-${{ github.event.release.tag_name }}.tgz
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ github.repository }}
+        path: ${{ github.workspace }}
+        persist-credentials: false
+
+    - name: Install module dependencies
+      run: composer install --no-dev --classmap-authoritative --no-progress --no-suggest
+      working-directory: ${{ github.workspace }}/app/code/community/Arengu/Auth
+
+    - name: Install packager dependencies
+      uses: actions/checkout@v2
+      with:
+        repository: openmage/magento-mirror
+        ref: '1.9.4.5'
+        path: '${{ github.workspace }}/magento'
+        fetch-depth: 1
+        persist-credentials: false
+
+    - name: Set version on config.xml
+      working-directory: ${{ github.workspace }}/app/code/community/Arengu/Auth/etc
+      run: sed -i -e 's/{{ VERSION }}/${{ github.event.release.tag_name }}/g' config.xml
+
+    - name: Build package
+      run: php build_package.php ${{ github.event.release.tag_name }}
+      working-directory: ${{ github.workspace }}
+
+    - name: Upload release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ${{ github.workspace }}/${{ env.BUILD_FILENAME }}
+        asset_name: ${{ env.BUILD_FILENAME }}
+        asset_content_type: application/gzip

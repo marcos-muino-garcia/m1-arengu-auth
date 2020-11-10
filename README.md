@@ -4,8 +4,10 @@ This module enables custom signup, login and passwordless endpoints to interact 
 Note that this module currently only allows you to manage the accounts of your customers and **not your admins'**.
 
 ## Installation
-1. Download the [latest release ZIP](https://github.com/arengu/m1-arengu-auth/releases/latest) file and **extract its contents directly inside the root directory of an existing Magento 1 installation**. You will know you did it right if you can find the file `Arengu_Auth.xml` located **precisely** inside `app/etc/modules/`. Otherwise, the module will not be detected by Magento.
-2. Go to the admin panel and install the module from the System menu.
+1. Download the [latest release TGZ](https://github.com/arengu/m1-arengu-auth/releases/latest) file and **don't extract it**.
+2. Go to your Magento admin panel and open System > Magento Connect > Magento Connect Manager.
+3. In the "Direct package file upload" section, choose the file you downloaded in step 1 and upload it.
+4. Go back to the admin panel and open System > Configuration menu. You will find a new "Arengu Auth" section in the left menu.
 
 ## Available endpoints
 
