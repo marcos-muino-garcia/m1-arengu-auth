@@ -174,12 +174,24 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
     }
 
     public function getJwtSecret() {
+        $env = getenv('ARENGU_AUTH_JWT_SECRET');
+
+        if($env !== false) {
+            return $env;
+        }
+
         return Mage::getModel('core/config_data')
             ->load(self::CONFIG_JWT_SECRET, 'path')
             ->getValue();
     }
 
     public function getApiKey() {
+        $env = getenv('ARENGU_AUTH_API_KEY');
+
+        if($env !== false) {
+            return $env;
+        }
+
         return Mage::getModel('core/config_data')
             ->load(self::CONFIG_API_KEY, 'path')
             ->getValue();
