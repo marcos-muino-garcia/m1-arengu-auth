@@ -41,7 +41,9 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
             ->setLastname($params['lastname'])
             ->setEmail($params['email'])
             ->setPassword($params['password'])
-            ->setPasswordConfirmation($params['password']);
+            ->setConfirmation($params['password']) // magento 1.7
+            ->setPasswordConfirmation($params['password']) // magento 1.9
+        ;
 
         $validationResult = $newCustomer->validate();
 
