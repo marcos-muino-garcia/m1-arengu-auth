@@ -9,6 +9,8 @@ Note that this module currently only allows you to manage the accounts of your c
 3. In the "Direct package file upload" section, choose the file you downloaded in step 1 and upload it.
 4. Go back to the admin panel and open System > Configuration menu. You will find a new "Arengu Auth" section in the left menu.
 
+If you get a `404 Not Found` error, just log out of the admin panel and log back in.
+
 ## Available endpoints
 
 These are all the operations exposed by this module:

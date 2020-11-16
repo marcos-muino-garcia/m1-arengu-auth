@@ -6,7 +6,6 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
     }
 
     public function indexAction() {
-
         $helper = $this->helper;
 
         $params = $helper->getTrimmedStrings($this->body, [
@@ -49,10 +48,8 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
         if(is_array($validationResult)) {
             $helper->renderError(
                 $this->response,
-                [
-                    'error_code' => 'validation_error',
-                    'error_message' => implode(' ', $validationResult),
-                ],
+                'validation_error',
+                implode(' ', $validationResult),
                 400
             );
 
@@ -60,7 +57,7 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
         }
 
         $newCustomer->save();
-
+        
         $token = $helper->buildTokenFromBody($this->body, $newCustomer);
 
         $helper->renderData(
