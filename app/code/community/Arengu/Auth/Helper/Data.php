@@ -154,16 +154,16 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
 
     // from zendframework/zend-crypt
     public function compareStrings($expected, $actual) {
-        $expected     = (string) $expected;
-        $actual       = (string) $actual;
+        $expected = (string) $expected;
+        $actual = (string) $actual;
 
         if (function_exists('hash_equals')) {
             return hash_equals($expected, $actual);
         }
 
-        $lenExpected  = $this->safeStrlen($expected);
-        $lenActual    = $this->safeStrlen($actual);
-        $len          = min($lenExpected, $lenActual);
+        $lenExpected = $this->safeStrlen($expected);
+        $lenActual = $this->safeStrlen($actual);
+        $len = min($lenExpected, $lenActual);
 
         $result = 0;
         for ($i = 0; $i < $len; $i++) {
@@ -171,7 +171,7 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
         }
         $result |= $lenExpected ^ $lenActual;
 
-        return ($result === 0);
+        return $result === 0;
     }
 
     public function isRequestAllowed(Mage_Core_Controller_Request_Http $request) {
