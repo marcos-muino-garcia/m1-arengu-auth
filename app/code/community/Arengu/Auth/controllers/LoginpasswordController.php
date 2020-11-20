@@ -64,6 +64,8 @@ class Arengu_Auth_LoginpasswordController extends Arengu_Auth_SecureRestControll
 
         $token = $helper->buildTokenFromBody($this->body, $customer);
 
+        $helper->sendDebugHeaders($this->response);
+
         $this->helper->renderData(
             $this->response,
             $this->helper->buildOutput($customer, $token)

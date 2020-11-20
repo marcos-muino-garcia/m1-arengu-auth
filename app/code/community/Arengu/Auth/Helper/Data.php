@@ -8,6 +8,7 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
 
     const CONFIG_JWT_SECRET = 'arengu_auth_settings/secrets/jwt_secret';
     const CONFIG_API_KEY = 'arengu_auth_settings/secrets/api_key';
+    const CONFIG_MODULE_VERSION = 'modules/Arengu_Auth/version';
 
     public function install($installer) {
         $db = $installer->getConnection();
@@ -72,6 +73,12 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
         }
 
         return $params;
+    }
+
+    public function sendDebugHeaders(Mage_Core_Controller_Response_Http $response) {
+        $response
+            ->setHeader('X-Magento-Version', Mage::getVersion())
+            ->setHeader('X-Module-Version', Mage::getConfig()->getNode(self::CONFIG_MODULE_VERSION));
     }
 
     public function renderData(Mage_Core_Controller_Response_Http $response, $data, $status = 200) {

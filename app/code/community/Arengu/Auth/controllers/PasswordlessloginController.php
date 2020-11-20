@@ -40,6 +40,8 @@ class Arengu_Auth_PasswordlessloginController extends Arengu_Auth_SecureRestCont
 
         $token = $helper->buildTokenFromBody($this->body, $customer);
 
+        $helper->sendDebugHeaders($this->response);
+
         $helper->renderData(
             $this->response,
             $helper->buildOutput($customer, $token)

@@ -27,6 +27,8 @@ class Arengu_Auth_CheckemailController extends Arengu_Auth_SecureRestController 
             ->setWebsiteId(Mage::app()->getWebsite()->getId())
             ->loadByEmail($email);
 
+        $helper->sendDebugHeaders($this->response);
+
         $helper->renderData(
             $this->response,
             ['email_exists' => (bool) $customer->getId()]

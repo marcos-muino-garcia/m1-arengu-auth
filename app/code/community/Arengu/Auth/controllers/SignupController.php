@@ -70,6 +70,8 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
             $token = $this->helper->buildTokenFromBody($this->body, $newCustomer);
         }
 
+        $helper->sendDebugHeaders($this->response);
+
         $helper->renderData(
             $this->response,
             $helper->buildOutput($newCustomer, $token)
