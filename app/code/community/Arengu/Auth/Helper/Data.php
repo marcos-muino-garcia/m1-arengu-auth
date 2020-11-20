@@ -124,7 +124,10 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
 
         if($token !== null) {
             $output['token'] = $token;
-            $output['login_url'] = Mage::getUrl(self::PATH_LOGINJWT, ['token' => $token]);
+            $output['login_url'] = Mage::getUrl(
+                self::PATH_LOGINJWT,
+                ['_query' => "token={$token}"]
+            );
         }
 
         return $output;
