@@ -118,15 +118,17 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
         );
     }
 
-    public function buildOutput($customer, $token) {
-        return [
+    public function buildOutput($customer, $token = null) {
+        $output = [
             'user' => $this->presentCustomer($customer),
-            'token' => $token,
-            'login_url' => Mage::getUrl(
-                self::PATH_LOGINJWT,
-                ['token' => $token]
-            ),
         ];
+
+        if($token !== null) {
+            $output['token'] = $token;
+            $output['login_url'] = Mage::getUrl(self::PATH_LOGINJWT, ['token' => $token]);
+        }
+
+        return $output;
     }
 
     public function getTrimmedStrings($arr, $keys) {

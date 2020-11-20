@@ -52,6 +52,14 @@ class Arengu_Auth_LoginjwtController extends Arengu_Auth_RestController {
             return;
         }
 
+        if($customer->getConfirmation() !== null) {
+            $this->renderError(
+                $helper->trans('Your email address is not verified yet. Please check your inbox.')
+            );
+
+            return;
+        }
+
         Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
 
         if($redirectUri) {
