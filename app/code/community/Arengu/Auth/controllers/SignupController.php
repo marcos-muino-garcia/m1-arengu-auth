@@ -43,8 +43,11 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
             ->setLastname($params['lastname'])
             ->setEmail($params['email'])
             ->setPassword($params['password'])
-            ->setConfirmation($params['password'])
             ->setPasswordConfirmation($params['password']) // magento 1.9
+
+            // note that magento requires this for validation and
+            // then discards its value before persisting
+            ->setConfirmation($params['password'])
         ;
 
         $validationResult = $newCustomer->validate();
@@ -60,7 +63,9 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
             return;
         }
 
-        $this->handleConfirmation($newCustomer, $params['skip_confirmation']);
+        if($params['skip_confirmation']) {
+            $newCustomer->setForceConfirmed(true);
+        }
 
         $newCustomer->save();
 
@@ -76,15 +81,5 @@ class Arengu_Auth_SignupController extends Arengu_Auth_SecureRestController {
             $this->response,
             $helper->buildOutput($newCustomer, $token)
         );
-    }
-
-    private function handleConfirmation(Mage_Customer_Model_Customer $customer, $skipConfirmation) {
-        $shouldForceConfirm =
-            $customer->isConfirmationRequired() &&
-            $skipConfirmation;
-
-        $customer
-            ->setConfirmation(null)
-            ->setForceConfirmed($shouldForceConfirm);
     }
 }
