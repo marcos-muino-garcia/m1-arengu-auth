@@ -27,11 +27,10 @@ class Arengu_Auth_LoginjwtController extends Arengu_Auth_RestController {
         }
 
         $issuer = $helper->getTrimmedString($decodedToken, 'iss');
-        $email = $helper->getTrimmedString($decodedToken, 'email');
         $customerId = $helper->getTrimmedString($decodedToken, 'sub');
         $redirectUri = $helper->getTrimmedString($decodedToken, 'redirect_uri');
 
-        if($issuer !== $_SERVER['SERVER_NAME'] || !$email || !$customerId) {
+        if($issuer !== $_SERVER['SERVER_NAME'] || !$customerId) {
             $this->renderError('Sorry, the provided token is not valid.');
             return;
         }
@@ -40,17 +39,7 @@ class Arengu_Auth_LoginjwtController extends Arengu_Auth_RestController {
 
         $customer
             ->setWebsiteId(Mage::app()->getWebsite()->getId())
-            ->loadByEmail($email);
-
-        // check for freaky coincidence where 2 users somehow managed to
-        // exchange email addresses between them after the token was generated
-        if ((string) $customer->getId() !== $customerId) {
-            $this->renderError(
-                $helper->trans('There was a problem validating your session, please try again.')
-            );
-
-            return;
-        }
+            ->load($customerId);
 
         if($customer->getConfirmation() !== null) {
             $this->renderError(

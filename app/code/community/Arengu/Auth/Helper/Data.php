@@ -96,7 +96,6 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
         $payload = [
             'iss' => $_SERVER['SERVER_NAME'],
             'exp' => $_SERVER['REQUEST_TIME'] + $expiresIn,
-            'email' => $customer->getEmail(),
             'sub' => (string) $customer->getId(),
         ];
 
