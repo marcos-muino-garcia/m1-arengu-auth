@@ -187,10 +187,17 @@ class Arengu_Auth_Helper_Data extends Mage_Core_Helper_Abstract {
 
     public function isRequestAllowed(Mage_Core_Controller_Request_Http $request) {
         $key = $this->getApiKey();
+        $header = $request->getHeader('Authorization');
+
+        // since some environments insist on deleting the 'Authorization' header
+        // from the request, try to fall back to our own non-standard header
+        if (!$header) {
+            $header = $request->getHeader('Arengu-Authorization');
+        }
 
         return $key && $this->compareStrings(
             "Bearer {$key}",
-            $request->getHeader('Authorization')
+            $header
         );
     }
 
