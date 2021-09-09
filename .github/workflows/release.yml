@@ -39,7 +39,7 @@ jobs:
       run: sed -i -e 's/{{ VERSION }}/${{ github.event.release.tag_name }}/g' config.xml
 
     - name: Build package
-      run: php build_package.php ${{ github.event.release.tag_name }}
+      run: php7.4 build_package.php ${{ github.event.release.tag_name }}
       working-directory: ${{ github.workspace }}
 
     - name: Upload release asset
